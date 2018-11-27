@@ -10,9 +10,6 @@ app.use(cors({
 
 addBedRoutes(app)
 
-app.get('/', (req, res) => {
-    res.send('Hello Mongo')
-})
 
 
 app.listen(3000)

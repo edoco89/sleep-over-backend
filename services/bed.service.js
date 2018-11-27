@@ -1,19 +1,21 @@
 const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
-
-function query({ byCountry = '', byCity = '', sortBy = {type: 'rating', order: 1} , filterByAmeneties = {} }) {
+function query({ byCountry = '', byCity = '', type = 'rating', order = 1, accessibility = false,
+    wifi = false, acceptsPets = false, airConditioner = false, shampoo = false, parking = false }) {
+    const sortBy = { type, order: +order }
+    const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking }
     const queryObj = {
         $and: [
-            { $or: [{ 'location.country': { $regex: `.*${byCountry.toLowerCase()}.*` } },{'location.country':  { $regex: `.*${byCountry.toUpperCase()}.*` } }] },
-            { $or: [{ 'location.city': { $regex: `.*${byCity.toLowerCase()}.*` } }, {'location.city': { $regex: `.*${byCity.toUpperCase()}.*` } }] }
+            { $or: [{ 'location.country': { $regex: `.*${byCountry.toLowerCase()}.*` } }, { 'location.country': { $regex: `.*${byCountry.toUpperCase()}.*` } }] },
+            { $or: [{ 'location.city': { $regex: `.*${byCity.toLowerCase()}.*` } }, { 'location.city': { $regex: `.*${byCity.toUpperCase()}.*` } }] }
         ]
     }
-    if (filterByAmeneties.accessibility) queryObj.$and.push({ 'ameneties.accessibility': true })
-    if (filterByAmeneties.wifi) queryObj.$and.push({ 'ameneties.wifi': true })
-    if (filterByAmeneties.acceptsPets) queryObj.$and.push({ 'ameneties.acceptsPets': true })
-    if (filterByAmeneties.shampoo) queryObj.$and.push({ 'ameneties.shampoo': true })
-    if (filterByAmeneties.parking) queryObj.$and.push({ 'ameneties.parking': true })
+    if (JSON.parse(filterByAmeneties.accessibility)) queryObj.$and.push({ 'ameneties.accessibility': true })
+    if (JSON.parse(filterByAmeneties.wifi)) queryObj.$and.push({ 'ameneties.wifi': true })
+    if (JSON.parse(filterByAmeneties.acceptsPets)) queryObj.$and.push({ 'ameneties.acceptsPets': true })
+    if (JSON.parse(filterByAmeneties.shampoo)) queryObj.$and.push({ 'ameneties.shampoo': true })
+    if (JSON.parse(filterByAmeneties.parking)) queryObj.$and.push({ 'ameneties.parking': true })
     return mongoService.connectToDb()
         .then(dbConn => {
             const bedCollection = dbConn.collection('bed');
