@@ -12,7 +12,7 @@ function addRoutes(app) {
     app.get('/api/bed/:bedId', (req, res) => {
         const bedId = req.params.bedId;
         bedService.getById(bedId)
-            .then(toy => res.json(bed))  
+            .then(bed => res.json(bed))  
     })
     
     app.delete('/api/bed/:bedId', (req, res) => {

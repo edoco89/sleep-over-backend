@@ -1,0 +1,98 @@
+[
+    {
+        "hostId": 67,
+        "languages": [
+            "Hebrew",
+            "English"
+        ],
+        "imgUrl": "https://a0.muscache.com/im/pictures/505bc60e-5bee-40ce-9972-8a166d997ea5.jpg?aki_policy=xx_large",
+        "location": {
+            "country": "germany",
+            "city": "berlin",
+            "street": "yarden",
+            "coords": {
+                "lat": 32.0853,
+                "lng": 34.7818
+            }
+        },
+        "type": "couch",
+        "rating": 2.5,
+        "reviews": [
+            {
+                "name": "Jake",
+                "txt": "I loved it"
+            },
+            {
+                "name": "Anat",
+                "txt": "It was terrible"
+            }
+        ],
+        "ditstanceFromCityCenter": 22,
+        "ameneties": {
+            "accesible": true,
+            "wifi": false,
+            "acceptsPets": true,
+            "airConditioner": false,
+            "shampoo": true,
+            "parking": false
+        }
+    },
+    {
+        "hostId": 12,
+        "languages": [
+            "Russian",
+            "English"
+        ],
+        "imgUrl": "https://a0.muscache.com/im/pictures/8c809b10-710f-47a2-bdc8-da0b7899e1b3.jpg?aki_policy=xx_large",
+        "location": {
+            "country": "israel",
+            "city": "hod hasharon",
+            "street": "sokolov",
+            "coords": {
+                "lat": 33.0853,
+                "lng": 35.7818
+            }
+        },
+        "type": "room",
+        "rating": 4.2,
+        "reviews": [],
+        "ditstanceFromCityCenter": 15,
+        "ameneties": {
+            "accesible": true,
+            "wifi": false,
+            "acceptsPets": false,
+            "airConditioner": true,
+            "shampoo": true,
+            "parking": true
+        }
+    },
+    {
+        "hostId": 1,
+        "languages": [
+            "Swahili",
+            "Chinese"
+        ],
+        "imgUrl": "https://a0.muscache.com/im/pictures/df707dc6-34a2-47a0-ba97-e85e66780efc.jpg?aki_policy=xx_large",
+        "location": {
+            "country": "israel",
+            "city": "tel aviv",
+            "street": "sokolov",
+            "coords": {
+                "lat": 32.0853,
+                "lng": 34.7818
+            }
+        },
+        "type": "couch",
+        "rating": 4.5,
+        "reviews": [],
+        "ditstanceFromCityCenter": 12,
+        "ameneties": {
+            "accessibility": true,
+            "wifi": false,
+            "acceptsPets": true,
+            "airConditioner": false,
+            "shampoo": true,
+            "parking": false
+        }
+    }
+]
