@@ -11,11 +11,11 @@ function query({ byCountry = '', byCity = '', type = 'rating', order = 1, access
             { $or: [{ 'location.city': { $regex: `.*${byCity.toLowerCase()}.*` } }, { 'location.city': { $regex: `.*${byCity.toUpperCase()}.*` } }] }
         ]
     }
-    if (JSON.parse(filterByAmeneties.accessibility)) queryObj.$and.push({ 'ameneties.accessibility': true })
-    if (JSON.parse(filterByAmeneties.wifi)) queryObj.$and.push({ 'ameneties.wifi': true })
-    if (JSON.parse(filterByAmeneties.acceptsPets)) queryObj.$and.push({ 'ameneties.acceptsPets': true })
-    if (JSON.parse(filterByAmeneties.shampoo)) queryObj.$and.push({ 'ameneties.shampoo': true })
-    if (JSON.parse(filterByAmeneties.parking)) queryObj.$and.push({ 'ameneties.parking': true })
+    for (const key in filterByAmeneties) {
+        if (JSON.parse(filterByAmeneties[key])) {
+            queryObj.$and.push({ [`ameneties.${key}`]: true })
+        }
+    }
     return mongoService.connectToDb()
         .then(dbConn => {
             const bedCollection = dbConn.collection('bed');
