@@ -12,9 +12,9 @@
             "city": "berlin",
             "street": "yarden",
             "coords": {
-                "lat": 32.0853,
-                "lng": 34.7818
-            }
+                "type": "Point",
+                "coordinates": [34.7818,32.0853]
+              }
         },
         "type": "couch",
         "rating": 2.5,
@@ -51,9 +51,9 @@
             "city": "hod hasharon",
             "street": "sokolov",
             "coords": {
-                "lat": 33.0853,
-                "lng": 35.7818
-            }
+                "type": "Point",
+                "coordinates": [35.7818,33.0853]
+              }
         },
         "type": "room",
         "rating": 4.2,
@@ -81,9 +81,9 @@
             "city": "tel aviv",
             "street": "sokolov",
             "coords": {
-                "lat": 32.0853,
-                "lng": 34.7818
-            }
+                "type": "Point",
+                "coordinates": [34.7818,32.0853]
+              }
         },
         "type": "couch",
         "rating": 4.5,
