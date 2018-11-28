@@ -1,7 +1,7 @@
 const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
-function query({ byLat = 0, byLng = 0, type = 'rating', order = 1, accessibility = false,
+function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, accessibility = false,
     wifi = false, acceptsPets = false, airConditioner = false, shampoo = false, parking = false }) {
     const sortBy = { type, order: +order }
     const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking }
