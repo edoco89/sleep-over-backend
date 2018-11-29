@@ -1,6 +1,7 @@
 [
     {
         "hostId": 67,
+        "hostName": "Michael Wong",
         "languages": [
             "Hebrew",
             "English"
@@ -28,17 +29,38 @@
             }
         ],
         "ditstanceFromCityCenter": 22,
-        "ameneties": {
-            "accesible": true,
-            "wifi": false,
-            "acceptsPets": true,
-            "airConditioner": false,
-            "shampoo": true,
-            "parking": false
+        "accessibility": {
+            "isAvailable": true,
+            "src": "@/assets/img/accessibility.png"
+        },
+        "wifi": {
+            "isAvailable": true,
+            "src": "@/assets/img/wifi.png"
+        },
+        "acceptsPets": {
+            "isAvailable": true,
+            "src": "@/assets/img/pets.png"
+        },
+        "airConditioner": {
+            "isAvailable": true,
+            "src": "@/assets/img/ac.png"
+        },
+        "shampoo": {
+            "isAvailable": true,
+            "src": "@/assets/img/shampoo.png"
+        },
+        "parking": {
+            "isAvailable": true,
+            "src": "@/assets/img/parking.png"
+        },
+        "children": {
+            "isAvailable": true,
+            "src": "@/assets/img/children.png"
         }
     },
     {
         "hostId": 12,
+        "hostName": "John Cohen",
         "languages": [
             "Russian",
             "English"
@@ -58,16 +80,39 @@
         "reviews": [],
         "ditstanceFromCityCenter": 15,
         "ameneties": {
-            "accesible": true,
-            "wifi": false,
-            "acceptsPets": false,
-            "airConditioner": true,
-            "shampoo": true,
-            "parking": true
+            "accessibility": {
+                "isAvailable": true,
+                "src": "@/assets/img/accessibility.png"
+            },
+            "wifi": {
+                "isAvailable": true,
+                "src": "@/assets/img/wifi.png"
+            },
+            "acceptsPets": {
+                "isAvailable": true,
+                "src": "@/assets/img/pets.png"
+            },
+            "airConditioner": {
+                "isAvailable": true,
+                "src": "@/assets/img/ac.png"
+            },
+            "shampoo": {
+                "isAvailable": true,
+                "src": "@/assets/img/shampoo.png"
+            },
+            "parking": {
+                "isAvailable": true,
+                "src": "@/assets/img/parking.png"
+            },
+            "children": {
+                "isAvailable": true,
+                "src": "@/assets/img/children.png"
+            }
         }
     },
     {
         "hostId": 1,
+        "hostName": "Yuri Levi",
         "languages": [
             "Swahili",
             "Chinese"
@@ -87,12 +132,34 @@
         "reviews": [],
         "ditstanceFromCityCenter": 12,
         "ameneties": {
-            "accessibility": true,
-            "wifi": false,
-            "acceptsPets": true,
-            "airConditioner": false,
-            "shampoo": true,
-            "parking": false
+            "accessibility": {
+                "isAvailable": true,
+                "src": "@/assets/img/accessibility.png"
+            },
+            "wifi": {
+                "isAvailable": true,
+                "src": "@/assets/img/wifi.png"
+            },
+            "acceptsPets": {
+                "isAvailable": true,
+                "src": "@/assets/img/pets.png"
+            },
+            "airConditioner": {
+                "isAvailable": true,
+                "src": "@/assets/img/ac.png"
+            },
+            "shampoo": {
+                "isAvailable": true,
+                "src": "@/assets/img/shampoo.png"
+            },
+            "parking": {
+                "isAvailable": true,
+                "src": "@/assets/img/parking.png"
+            },
+            "children": {
+                "isAvailable": true,
+                "src": "@/assets/img/children.png"
+            }
         }
     }
 ]
