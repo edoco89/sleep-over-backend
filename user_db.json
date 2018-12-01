@@ -1,9 +1,14 @@
 [
     {
-        "fullname": "Jake Collins",
+        "fullname": "Michael Wong",
         "email": "ggg@gmail.com",
         "password": "1234",
-        "hobbies": ["sport", "food"], 
+        "hobbies": ["sport", "food"],
+        "languages": [
+            "Russian",
+            "English"
+        ],
+        "isHost": false,
         "aboutMe": "I love to sing with friends",
         "guestBadge": "", 
         "hostBadge": "", 
@@ -11,135 +16,47 @@
         "gender": "male",
         "imgUrl": "https://pmcdeadline2.files.wordpress.com/2013/07/amyacker__130721002642.jpg",
         "hostBedsId": ["5bffe487001936be312de7d8"],
-        "bedVisitedId": []
+        "bedVisitedId": [],
+        "reviews": [],
+        "chatHistory": []
     },
     {
         "fullname": "Rachel",
         "email": "rachel@gmail.com",
         "password": "1234",
-        "hobbies": ["culture", "hiking"], 
+        "hobbies": ["culture", "hiking"],
+        "languages": ["Hebrew"],
+        "isHost": false, 
         "aboutMe": "I love to watch other people",
         "guestBadge": "", 
         "hostBadge": "", 
-        "age": 25,
+        "age": 62,
         "gender": "female",
         "imgUrl": "https://cdn-03.independent.ie/incoming/article36985197.ece/00621/AUTOCROP/w620/ipanews_51c6a661-c337-49b5-bff4-b0a7d4bc56bd_1",
         "hostBedsId": ["5bffe487001936be312de7d8"],
-        "bedVisitedId": []
+        "bedVisitedId": [],
+        "reviews": [],
+        "chatHistory": []
     },
     {
-        "_id": "5bffe487001936be312de7d8",
-        "hostId": 67,
-        "hostName": "Michael Wong",
+        "fullname": "John Cohen",
+        "email": "rachel@gmail.com",
+        "password": "1234",
+        "hobbies": ["culture", "hiking"], 
         "languages": [
-            "Hebrew",
+            "hebrew",
             "English"
         ],
-        "imgUrl": "https://a0.muscache.com/im/pictures/505bc60e-5bee-40ce-9972-8a166d997ea5.jpg?aki_policy=xx_large",
-        "location": {
-            "country": "germany",
-            "city": "berlin",
-            "street": "yarden",
-            "coords": {
-                "type": "Point",
-                "coordinates": [
-                    34.7818,
-                    32.0853
-                ]
-            }
-        },
-        "type": "couch",
-        "rating": 2.5,
-        "reviews": [
-            {
-                "name": "Jake",
-                "txt": "I loved it"
-            },
-            {
-                "name": "Anat",
-                "txt": "It was terrible"
-            }
-        ],
-        "ditstanceFromCityCenter": 22,
-        "ameneties": {
-            "accessibility": true,
-            "wifi": true,
-            "acceptsPets": true,
-            "airConditioner": true,
-            "shampoo": true,
-            "parking": true,
-            "children": true
-        }
-    },
-    {
-        "_id": "5bffe487001936be312de7d9",
-        "hostId": 12,
-        "hostName": "John Cohen",
-        "languages": [
-            "Russian",
-            "English"
-        ],
-        "imgUrl": "https://a0.muscache.com/im/pictures/8c809b10-710f-47a2-bdc8-da0b7899e1b3.jpg?aki_policy=xx_large",
-        "location": {
-            "country": "israel",
-            "city": "hod hasharon",
-            "street": "sokolov",
-            "coords": {
-                "type": "Point",
-                "coordinates": [
-                    35.7818,
-                    33.0853
-                ]
-            }
-        },
-        "type": "room",
-        "rating": 4.2,
+        "isHost": false,
+        "aboutMe": "I know some people",
+        "guestBadge": "", 
+        "hostBadge": "", 
+        "age": 31,
+        "gender": "male",
+        "imgUrl": "https://pmctvline2.files.wordpress.com/2017/06/criminal-minds-daniel-henney.jpg?w=620",
+        "hostBedsId": ["5bffe487001936be312de7d8"],
+        "bedVisitedId": [],
         "reviews": [],
-        "ditstanceFromCityCenter": 15,
-        "ameneties": {
-            "accessibility": true,
-            "wifi": true,
-            "acceptsPets": true,
-            "airConditioner": true,
-            "shampoo": true,
-            "parking": true,
-            "children": true
-        }
-    },
-    {
-        "_id": "5bffe487001936be312de7da",
-        "hostId": 1,
-        "hostName": "Yuri Levi",
-        "languages": [
-            "Swahili",
-            "Chinese"
-        ],
-        "imgUrl": "https://a0.muscache.com/im/pictures/df707dc6-34a2-47a0-ba97-e85e66780efc.jpg?aki_policy=xx_large",
-        "hostImg": "https://pmctvline2.files.wordpress.com/2017/06/criminal-minds-daniel-henney.jpg?w=620",
-        "location": {
-            "country": "israel",
-            "city": "tel aviv",
-            "street": "sokolov",
-            "coords": {
-                "type": "Point",
-                "coordinates": [
-                    34.7818,
-                    32.0853
-                ]
-            }
-        },
-        "type": "couch",
-        "rating": 4.5,
-        "reviews": [],
-        "ditstanceFromCityCenter": 12,
-        "ameneties": {
-            "accessibility": true,
-            "wifi": true,
-            "acceptsPets": true,
-            "airConditioner": true,
-            "shampoo": true,
-            "parking": true,
-            "children": true
-        }
+        "chatHistory": []
     }
 ]
