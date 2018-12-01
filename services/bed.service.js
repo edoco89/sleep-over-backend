@@ -2,19 +2,20 @@ const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
 function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, accessibility = false,
-    wifi = false, acceptsPets = false, airConditioner = false, shampoo = false, parking = false }) {
+    wifi = false, acceptsPets = false, airConditioner = false, shampoo = false, parking = false, children = false }) {
     const sortBy = { type, order: +order }
-    const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking }
+    const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking, children }
     const queryObj = {
-            $and: [
-                {'location.coords': {
+        $and: [
+            {
+                'location.coords': {
                     $near: {
                         $geometry:
                             { type: "Point", coordinates: [+byLng, +byLat] }, $maxDistance: 2000
                     }
                 }
-                },
-            ]
+            },
+        ]
 
     }
     for (const key in filterByAmeneties) {
