@@ -3,7 +3,7 @@ const userService = require('../services/user.service')
 
 
 function addRoutes(app) {
-    //CHECK
+    //CHECK    
     app.get('/api/user', (req, res) => {
         const filter = req.query;
         userService.query(filter)

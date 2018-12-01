@@ -10,6 +10,7 @@ function query() {
         })
 }
 
+
 function checkLogin(email, pass) {
     return mongoService.connect()
         .then(db => {
@@ -18,7 +19,7 @@ function checkLogin(email, pass) {
         })
 }
 
-// todo  - add user only if nickname is not taken
+
 function addUser(user) {
     return mongoService.connect()
         .then(db => db.collection('user').insertOne(user))

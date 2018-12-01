@@ -2,9 +2,12 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const addBedRoutes = require('./routes/bed.route')
+const addChatRoutes = require('./routes/chat.route')
 const addUserRoutes = require('./routes/user.route')
 const session = require('express-session')
 const cors = require('cors')
+var http = require('http').Server(app);
+var io = require('socket.io').listen(http, {origins: 'http://localhost:8080'});
 
 app.use(bodyParser.json());
 
@@ -22,7 +25,19 @@ app.use(cors({
 
 addBedRoutes(app)
 addUserRoutes(app)
+addChatRoutes(app)
+
+http.listen(3000)
+
+
+io.on("connection", function(socket){
+  console.log("Socket Connection Established with ID :"+ socket.id)
+  socket.on("chat", async function(chat){
+    chat.created = new Date()
+    let response = await new message(chat).save()
+    socket.emit("chat",chat)
+  })
+})
 
 
 
-app.listen(3000)

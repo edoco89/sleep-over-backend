@@ -1,0 +1,43 @@
+[
+    {
+        "usersId": ["1", "2"],
+        "messeges": [
+            {
+                "from": "1",
+                "to": "2",
+                "txt": "hey",
+                "timestemp": 1543522278729
+            },
+            {
+                "from": "2",
+                "to": "1",
+                "txt": "hey",
+                "timestemp": 1543522278739
+            },
+            {
+                "from": "1",
+                "to": "2",
+                "txt": "bye",
+                "timestemp": 1543522278740
+            }
+        ]
+    },
+    {
+        "usersId": ["3", "4"],
+        "messeges": [
+            {
+                "txt": "",
+                "timestemp": 1543522278739
+            }
+        ]
+    },
+    {
+        "usersId": ["5","6"],
+        "messeges": [
+            {
+                "txt": "",
+                "timestemp": 1543522278739
+            }
+        ]
+    }
+]
