@@ -5,13 +5,12 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
     wifi = false, acceptsPets = false, airConditioner = false, shampoo = false, parking = false }) {
     const sortBy = { type, order: +order }
     const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking }
-    console.log(byLat, byLng);
     const queryObj = {
             $and: [
                 {'location.coords': {
                     $near: {
                         $geometry:
-                            { type: "Point", coordinates: [+byLng, +byLat] }, $maxDistance: 20000
+                            { type: "Point", coordinates: [+byLng, +byLat] }, $maxDistance: 2000
                     }
                 }
                 },
