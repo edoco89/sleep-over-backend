@@ -9,6 +9,8 @@ const cors = require('cors')
 var http = require('http').Server(app);
 var io = require('socket.io').listen(http, {origins: 'http://localhost:8080'});
 
+app.use(express.static('public'));
+
 app.use(bodyParser.json());
 
 app.use(session({
@@ -27,7 +29,12 @@ addBedRoutes(app)
 addUserRoutes(app)
 addChatRoutes(app)
 
-http.listen(3000)
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`App listening on port ${port}!`)
+ });
+ 
 
 
 io.on("connection", function(socket){
