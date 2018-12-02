@@ -26,6 +26,12 @@ function addRoutes(app) {
             .then(user => res.json(user))
     })
 
+    app.get('/api/user/:userId', (req, res) => {
+        const userId = req.params.userId;
+        userService.getUserBeds(userId)
+            .then(userBeds => res.json(userBeds))
+    })
+
     //CHECK
     app.delete('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;

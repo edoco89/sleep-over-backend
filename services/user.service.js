@@ -12,17 +12,17 @@ function query() {
 
 
 function checkLogin(email, pass) {
-    return mongoService.connect()
-        .then(db => {
-            const user = db.collection('user').findOne({ email })
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const user = dbConn.collection('user').findOne({ email })
             if (user) console.log('found user', user);
         })
 }
 
 
 function addUser(user) {
-    return mongoService.connect()
-        .then(db => db.collection('user').insertOne(user))
+    return mongoService.connectToDb()
+        .then(dbConn => dbConn.collection('user').insertOne(user))
         .then(res => {
             user._id = res.insertedId
             return user
@@ -30,7 +30,7 @@ function addUser(user) {
 }
 
 function getById(userId) {
-    userId = new ObjectId(userId)
+    // userId = new ObjectId(userId)
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
@@ -46,11 +46,38 @@ function remove(userId) {
         })
 }
 
+
+function getUserBeds(userId) {
+    const id = new ObjectId(userId)
+    console.log('server gets', userId);
+
+    return mongoService.connectToDb()
+        .then(dbConn =>
+            dbConn.collection('user').aggregate([
+                {
+                    $match: { _id: id }
+                },
+                {
+                    $lookup:
+                    {
+                        from: 'bed',
+                        localField: 'hostBedsId',
+                        foreignField: 'likeId',
+                        as: 'bed'
+                    }
+                }, {
+                    $unwind: '$beds'
+                }
+            ]).toArray()
+        )
+}
+
 module.exports = {
     query,
     getById,
     remove,
     checkLogin,
-    addUser
+    addUser,
+    getUserBeds
 }
 
