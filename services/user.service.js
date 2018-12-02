@@ -15,16 +15,29 @@ function checkLogin(email, pass) {
     return mongoService.connectToDb()
         .then(dbConn => {
             return dbConn.collection('user').findOne({ email })
+                .then(user => {
+                    if (user.password === pass) return user
+                    else throw Error('user dont excist!')
+                })
         })
 }
 
 
 function addUser(user) {
     return mongoService.connectToDb()
-        .then(dbConn => dbConn.collection('user').insertOne(user))
-        .then(res => {
-            user._id = res.insertedId
-            return user
+        .then(dbConn => {
+            const email = user.email
+            return dbConn.collection('user').findOne({ email })
+                .then((excist) => {
+                    if (!excist) {
+                        return dbConn.collection('user').insertOne(user)
+                            .then(res => {
+                                user._id = res.insertedId
+                                return user
+                            })     
+                    }
+                    else throw Error('user excist!')
+                })
         })
 }
 
