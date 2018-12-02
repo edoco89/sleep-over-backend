@@ -14,8 +14,7 @@ function query() {
 function checkLogin(email, pass) {
     return mongoService.connectToDb()
         .then(dbConn => {
-            const user = dbConn.collection('user').findOne({ email })
-            if (user) console.log('found user', user);
+            return dbConn.collection('user').findOne({ email })
         })
 }
 
