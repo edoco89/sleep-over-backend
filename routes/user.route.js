@@ -33,6 +33,12 @@ function addRoutes(app) {
             .then(() => res.end())
     })
 
+    app.get('/api/user/:userId', (req, res) => {
+        const userId = req.params.bedId;
+        userService.getById(userId)
+            .then(user => res.json(user))  
+    })
+
 }
 
 
