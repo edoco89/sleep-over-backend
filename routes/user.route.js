@@ -26,7 +26,7 @@ function addRoutes(app) {
             .then(user => res.json(user))
     })
 
-    app.get('/api/user/:userId', (req, res) => {
+    app.get('/api/user/userBeds/:userId', (req, res) => {
         const userId = req.params.userId;
         userService.getUserBeds(userId)
             .then(userBeds => res.json(userBeds))
