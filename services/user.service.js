@@ -42,7 +42,7 @@ function addUser(user) {
 }
 
 function getById(userId) {
-    // userId = new ObjectId(userId)
+    userId = new ObjectId(userId)
     return mongoService.connectToDb()
         .then(dbConn => {
             const userCollection = dbConn.collection('user');
@@ -81,6 +81,13 @@ function getUserBeds(userId) {
                     }
                 }, {
                     $unwind: '$bed'
+                },
+                {
+                    $group:
+                      {
+                        _id: "beds" ,
+                        beds: { $push:  "$bed" }
+                  }
                 }
             ]).toArray()
         )

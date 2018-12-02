@@ -45,7 +45,13 @@
             "shampoo": true,
             "parking": true,
             "children": true
-        }
+        },
+        "unAvailable": [
+            {
+                "start": "",
+                "end": ""
+            }
+        ]
     },
     {
         "likeId": "2",
