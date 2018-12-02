@@ -2,9 +2,12 @@ const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
 function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, accessibility = false,
-    wifi = false, acceptsPets = false, airConditioner = false, shampoo = false, parking = false, children = false }) {
+    wifi = false, acceptsPets = false, airConditioner = false, shampoo = false, parking = false, children = false,
+    byStart = new Date().toLocaleDateString("en-US"), byEnd = new Date().toLocaleDateString("en-US") }) {
     const sortBy = { type, order: +order }
     const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking, children }
+    console.log(byStart, byEnd);
+    
     const queryObj = {
         $and: [
             {
@@ -15,6 +18,16 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
                     }
                 }
             },
+        ],
+        $nor: [
+            {
+            unAvailable: {
+                    $elemMatch: { 
+                        start: { $gte: new Date(byStart) },
+                        end:   { $gte: new Date(byEnd) } 
+                    }
+                }
+            }
         ]
 
     }

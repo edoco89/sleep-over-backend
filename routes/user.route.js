@@ -22,6 +22,8 @@ function addRoutes(app) {
 
     app.post('/api/user/singup', (req, res) => {
         const user = req.body.user
+        console.log('!!!!', user);
+        return
         userService.addUser(user)
             .then(user => res.json(user))
     })
@@ -42,7 +44,7 @@ function addRoutes(app) {
     app.get('/api/user/:userId', (req, res) => {
         const userId = req.params.bedId;
         userService.getById(userId)
-            .then(user => res.json(user))  
+            .then(user => res.json(user))
     })
 
 }
