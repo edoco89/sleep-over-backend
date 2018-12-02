@@ -3,10 +3,9 @@ const userService = require('../services/user.service')
 
 
 function addRoutes(app) {
-    //CHECK    
+    //WORKS. NOT IN USE CURRENTLY   
     app.get('/api/user', (req, res) => {
-        const filter = req.query;
-        userService.query(filter)
+        userService.query()
             .then(users => res.json(users))
     });
 
@@ -36,7 +35,7 @@ function addRoutes(app) {
             .then(userBeds => res.json(userBeds))
     })
 
-    //CHECK
+    //WORKS. NOT IN USE CURRENTLY
     app.delete('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;
         userService.remove(userId)

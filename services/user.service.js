@@ -1,7 +1,7 @@
 const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
-//MAKE BETTER
+//WORKS. NOT IN USE CURRENTLY
 function query() {
     return mongoService.connectToDb()
         .then(dbConn => {
@@ -50,6 +50,7 @@ function getById(userId) {
         })
 }
 
+//WORKS. NOT IN USE CURRENTLY
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
