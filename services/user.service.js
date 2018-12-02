@@ -67,7 +67,7 @@ function getUserBeds(userId) {
                         as: 'bed'
                     }
                 }, {
-                    $unwind: '$beds'
+                    $unwind: '$bed'
                 }
             ]).toArray()
         )
