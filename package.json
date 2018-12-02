@@ -2,7 +2,8 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-    "dir": "dir"
+    "dir": "dir",
+    "start": "node server.js"
   },
   "author": "Me",
   "license": "ISC",
