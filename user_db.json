@@ -15,7 +15,7 @@
         "age": 25,
         "gender": "male",
         "imgUrl": "https://pmcdeadline2.files.wordpress.com/2013/07/amyacker__130721002642.jpg",
-        "hostBedsId": ["5bffe487001936be312de7d8"],
+        "hostBedsId": "1",
         "bedVisitedId": [],
         "reviews": [],
         "chatHistory": []
@@ -33,7 +33,7 @@
         "age": 62,
         "gender": "female",
         "imgUrl": "https://cdn-03.independent.ie/incoming/article36985197.ece/00621/AUTOCROP/w620/ipanews_51c6a661-c337-49b5-bff4-b0a7d4bc56bd_1",
-        "hostBedsId": ["5bffe487001936be312de7d8"],
+        "hostBedsId": "2",
         "bedVisitedId": [],
         "reviews": [],
         "chatHistory": []
@@ -54,7 +54,7 @@
         "age": 31,
         "gender": "male",
         "imgUrl": "https://pmctvline2.files.wordpress.com/2017/06/criminal-minds-daniel-henney.jpg?w=620",
-        "hostBedsId": ["5bffe487001936be312de7d8"],
+        "hostBedsId": "2",
         "bedVisitedId": [],
         "reviews": [],
         "chatHistory": []

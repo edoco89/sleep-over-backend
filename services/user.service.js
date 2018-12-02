@@ -37,6 +37,7 @@ function getById(userId) {
             return userCollection.findOne({ _id: userId })
         })
 }
+
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
