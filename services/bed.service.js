@@ -6,11 +6,6 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
     byStart = new Date().getTime(), byEnd = new Date().getTime() }) {
     const sortBy = { type, order: +order }
     const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking, children }
-<<<<<<< HEAD
-    console.log(byStart, byEnd);
-
-=======
->>>>>>> c181fe318304631e93ac9de1d460fb02b6d702c7
     const queryObj = {
         $and: [
             {
@@ -23,19 +18,10 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
             }
             ,
             {
-<<<<<<< HEAD
-                unAvailable: {
-                    $elemMatch: {
-                        start: { $gte: new Date(byStart) },
-                        end: { $gte: new Date(byEnd) }
-                    }
-                }
-=======
                 $nor: [
                     { unAvailable: { $elemMatch: { start: { $gte: +byStart, $lte: +byEnd } } } },
                     { unAvailable: { $elemMatch: { end: { $gte: +byStart, $lte: +byEnd } } } }
                 ]
->>>>>>> c181fe318304631e93ac9de1d460fb02b6d702c7
             }
         ]
     }
