@@ -1,7 +1,7 @@
 const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
-//WORKS. NOT IN USE CURRENTLY
+//QUERY-WORKS. NOT IN USE CURRENTLY
 function query() {
     return mongoService.connectToDb()
         .then(dbConn => {
@@ -10,7 +10,7 @@ function query() {
         })
 }
 
-
+//LOGIN
 function checkLogin(email, pass) {
     return mongoService.connectToDb()
         .then(dbConn => {
@@ -22,7 +22,7 @@ function checkLogin(email, pass) {
         })
 }
 
-
+//ADD
 function addUser(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
@@ -34,13 +34,14 @@ function addUser(user) {
                             .then(res => {
                                 user._id = res.insertedId
                                 return user
-                            })     
+                            })
                     }
                     else throw Error('user excist!')
                 })
         })
 }
 
+//GET BY ID
 function getById(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -50,7 +51,7 @@ function getById(userId) {
         })
 }
 
-//WORKS. NOT IN USE CURRENTLY
+//DELETE- WORKS. NOT IN USE CURRENTLY
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -60,7 +61,7 @@ function remove(userId) {
         })
 }
 
-
+//USER WITH ALL HIS BEDS
 function getUserBeds(userId) {
     const id = new ObjectId(userId)
     console.log('server gets', userId);
@@ -84,10 +85,10 @@ function getUserBeds(userId) {
                 },
                 {
                     $group:
-                      {
-                        _id: "beds" ,
-                        beds: { $push:  "$bed" }
-                  }
+                    {
+                        _id: "beds",
+                        beds: { $push: "$bed" }
+                    }
                 }
             ]).toArray()
         )

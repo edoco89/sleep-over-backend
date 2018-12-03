@@ -7,7 +7,7 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
     const sortBy = { type, order: +order }
     const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking, children }
     console.log(byStart, byEnd);
-    
+
     const queryObj = {
         $and: [
             {
@@ -21,10 +21,10 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
         ],
         $nor: [
             {
-            unAvailable: {
-                    $elemMatch: { 
+                unAvailable: {
+                    $elemMatch: {
                         start: { $gte: new Date(byStart) },
-                        end:   { $gte: new Date(byEnd) } 
+                        end: { $gte: new Date(byEnd) }
                     }
                 }
             }
@@ -60,8 +60,21 @@ function remove(bedId) {
         })
 }
 
+
+function addBed(bed) {
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            return dbConn.collection('bed').insertOne(bed)
+                .then(res => {
+                    bed._id = res.insertedId
+                    return bed
+                })
+        })
+}
+
 module.exports = {
     query,
     getById,
-    remove
+    remove,
+    addBed
 }
