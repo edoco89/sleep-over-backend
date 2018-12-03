@@ -1,43 +1,24 @@
 [
     {
+
         "messages": [
             {
-                "from": "1",
-                "to": "2",
+                "from": "5c03ab749d2411003001ba9c",
+                "to": "5c03ab749d2411003001ba9d",
                 "txt": "hey",
                 "timestamp": 1543522278729
             },
             {
-                "from": "2",
-                "to": "1",
+                "from": "5c03ab749d2411003001ba9d",
+                "to": "5c03ab749d2411003001ba9c",
                 "txt": "hey",
                 "timestamp": 1543522278739
             },
             {
-                "from": "1",
-                "to": "2",
+                "from": "5c03ab749d2411003001ba9c",
+                "to": "5c03ab749d2411003001ba9d",
                 "txt": "bye",
                 "timestamp": 1543522278740
-            }
-        ]
-    },
-    {
-        "messages": [
-            {
-                "from": "1",
-                "to": "2",
-                "txt": "nn",
-                "timestamp": 1543522278739
-            }
-        ]
-    },
-    {
-        "messages": [
-            {
-                "from": "5",
-                "to": "6",
-                "txt": "aa",
-                "timestamp": 1543522278739
             }
         ]
     }

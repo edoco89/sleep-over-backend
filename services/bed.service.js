@@ -56,6 +56,7 @@ function remove(bedId) {
 
 
 function addBed(bed) {
+    bed.hostId = new ObjectId(bed.hostId)
     return mongoService.connectToDb()
         .then(dbConn => {
             return dbConn.collection('bed').insertOne(bed)
