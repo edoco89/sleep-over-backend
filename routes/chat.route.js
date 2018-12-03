@@ -14,11 +14,11 @@ function addRoutes(app) {
             .then(chat => res.json(chat));
     })
 
-    // app.put('/api/chat/:chatId', (req, res) => {
-    //     const bedId = req.body;
-    //     bedService.remove(bedId)
-    //         .then(() => res.end())  
-    // })
+    app.put('/api/chat/:chatId', (req, res) => {
+        const bedId = req.body;
+        bedService.remove(bedId)
+            .then(() => res.end())  
+    })
 
 }
 
