@@ -13,31 +13,34 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
+app.use(cors({
+  origin: ['http://localhost:8080'],
+  credentials: true
+}));
 app.use(session({
-    secret: 'this is a secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
+  secret: 'this is a secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
 }))
 
-app.use(cors({
-    origin: ['http://localhost:8080'],
-    credentials: true
-}));
 
 addBedRoutes(app)
 addUserRoutes(app)
 addChatRoutes(app)
 
-const port = process.env.PORT || 3000;
+const port = 3000 || process.env.PORT;
 
-app.listen(port, () => {
+// app.listen(port, () => {
+//   console.log(`App listening on port ${port}!`)
+// });
+
+http.listen(port, () => {
   console.log(`App listening on port ${port}!`)
- });
- 
+});
 
 
-io.on("connection", function(socket){
+io.on('connection', function(socket){
   console.log("Socket Connection Established with ID :"+ socket.id)
   socket.on("chat", async function(chat){
     chat.created = new Date()

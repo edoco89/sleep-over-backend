@@ -32,7 +32,20 @@ function addRoutes(app) {
             .catch(err => res.status(403).send(err))
     })
 
-    //USER WITH ALL ITS BEDS
+    //Added update**
+
+    app.put('/api/user/:userId', (req, res) => {
+        const user = req.body.newUser;
+        userService.updateUser(user)
+            .then(user => {
+                req.session.loggedinUser = user;
+                console.log('app.put in user route')
+                return res.json(user)
+            })
+            .catch(err => res.status(403).send(err))
+    })
+
+    //AGGREGATE
     app.get('/api/user/userBeds/:userId', (req, res) => {
         const userId = req.params.userId;
         userService.getUserBeds(userId)

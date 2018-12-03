@@ -17,7 +17,7 @@ function checkLogin(email, pass) {
             return dbConn.collection('user').findOne({ email })
                 .then(user => {
                     if (user.password === pass) return user
-                    else throw Error('user dont excist!')
+                    else throw Error('User doesnt exist!')
                 })
         })
 }
@@ -28,15 +28,28 @@ function addUser(user) {
         .then(dbConn => {
             const email = user.email
             return dbConn.collection('user').findOne({ email })
-                .then((excist) => {
-                    if (!excist) {
+                .then((exists) => {
+                    if (!exists) {
                         return dbConn.collection('user').insertOne(user)
                             .then(res => {
                                 user._id = res.insertedId
                                 return user
                             })
                     }
-                    else throw Error('user excist!')
+                    else throw Error('User already exists!')
+                })
+        })
+}
+
+// Added update** upsert is true so should be used for add as well
+
+function updateUser(user) {
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const email = user.email
+            return dbConn.collection('user').updateOne({ email }, {$set: {user}}, { upsert: true })
+                .then(res => {
+                    return user
                 })
         })
 }
@@ -100,6 +113,7 @@ module.exports = {
     remove,
     checkLogin,
     addUser,
-    getUserBeds
+    getUserBeds,
+    updateUser
 }
 

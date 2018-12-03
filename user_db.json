@@ -1,6 +1,6 @@
 [
     {
-        "fullname": "Michael Wong",
+        "fullname": "Amy Sherring",
         "email": "ggg@gmail.com",
         "password": "1234",
         "hobbies": ["sport", "food"],
@@ -13,7 +13,7 @@
         "guestBadge": "", 
         "hostBadge": "", 
         "age": 25,
-        "gender": "male",
+        "gender": "Female",
         "imgUrl": "https://pmcdeadline2.files.wordpress.com/2013/07/amyacker__130721002642.jpg",
         "hostBedsId": "1",
         "bedVisitedId": [],
@@ -21,7 +21,7 @@
         "chatHistory": []
     },
     {
-        "fullname": "Rachel",
+        "fullname": "Rick Brown",
         "email": "rachel@gmail.com",
         "password": "1234",
         "hobbies": ["culture", "hiking"],
@@ -31,7 +31,7 @@
         "guestBadge": "", 
         "hostBadge": "", 
         "age": 62,
-        "gender": "female",
+        "gender": "Male",
         "imgUrl": "https://cdn-03.independent.ie/incoming/article36985197.ece/00621/AUTOCROP/w620/ipanews_51c6a661-c337-49b5-bff4-b0a7d4bc56bd_1",
         "hostBedsId": "2",
         "bedVisitedId": [],
@@ -40,7 +40,7 @@
     },
     {
         "fullname": "John Cohen",
-        "email": "rachel@gmail.com",
+        "email": "john@gmail.com",
         "password": "1234",
         "hobbies": ["culture", "hiking"], 
         "languages": [
