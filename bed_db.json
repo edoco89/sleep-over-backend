@@ -1,6 +1,5 @@
 [
     {
-        "likeId": "2",
         "hostId": "5c02a7e99d2411003001ba79",
         "hostName": "Michael Wong",
         "languages": [
@@ -58,7 +57,6 @@
         ]
     },
     {
-        "likeId": "2",
         "hostId": 67,
         "hostName": "Michael Wong",
         "languages": [
@@ -116,7 +114,6 @@
         ]
     },
     {
-        "likeId": "1",
         "hostId": 67,
         "hostName": "Michael Wong",
         "languages": [

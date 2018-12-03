@@ -59,9 +59,11 @@ function addRoutes(app) {
             .then(() => res.end())
     })
 
-    //USER BY ID- WORKS. NOT IN USE CURRENTLY
+    //USER BY ID
     app.get('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;
+        console.log('!!!!', userId);
+
         userService.getById(userId)
             .then(user => res.json(user))
     })

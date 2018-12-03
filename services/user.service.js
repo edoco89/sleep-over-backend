@@ -16,7 +16,13 @@ function checkLogin(email, pass) {
         .then(dbConn => {
             return dbConn.collection('user').findOne({ email })
                 .then(user => {
-                    if (user.password === pass) return user
+                    if (user.password === pass) {
+                        return getUserBeds(user._id)
+                            .then(beds => {
+                                (beds[0]) ? user.hostBeds = beds[0].beds : user.hostBeds = [];
+                                return user
+                            })
+                    }
                     else throw Error('User doesnt exist!')
                 })
         })
@@ -47,7 +53,7 @@ function updateUser(user) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const email = user.email
-            return dbConn.collection('user').updateOne({ email }, {$set: {user}}, { upsert: true })
+            return dbConn.collection('user').updateOne({ email }, { $set: { user } }, { upsert: true })
                 .then(res => {
                     return user
                 })
@@ -77,8 +83,6 @@ function remove(userId) {
 //USER WITH ALL HIS BEDS
 function getUserBeds(userId) {
     const id = new ObjectId(userId)
-    console.log('server gets', userId);
-
     return mongoService.connectToDb()
         .then(dbConn =>
             dbConn.collection('user').aggregate([
@@ -89,8 +93,8 @@ function getUserBeds(userId) {
                     $lookup:
                     {
                         from: 'bed',
-                        localField: 'hostBedsId',
-                        foreignField: 'likeId',
+                        localField: '_id',
+                        foreignField: 'hostId',
                         as: 'bed'
                     }
                 }, {
