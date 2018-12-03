@@ -44,11 +44,13 @@ function addUser(user) {
 // Added update** upsert is true so should be used for add as well
 
 function updateUser(user) {
+    console.log(user)
+    _id = new ObjectId(user._id)
     return mongoService.connectToDb()
         .then(dbConn => {
-            const email = user.email
-            return dbConn.collection('user').updateOne({ email }, {$set: {user}}, { upsert: true })
+            return dbConn.collection('user').updateOne({_id}, {$set: user})
                 .then(res => {
+                    console.log('userservice age', user.age)
                     return user
                 })
         })
