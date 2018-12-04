@@ -31,23 +31,11 @@ addChatRoutes(app)
 
 const port = 3000 || process.env.PORT;
 
-// app.listen(port, () => {
-//   console.log(`App listening on port ${port}!`)
-// });
 
 http.listen(port, () => {
   console.log(`App listening on port ${port}!`)
 });
 
+const setupIoConnection = require('./services/socket.service')
 
-io.on('connection', function(socket){
-  console.log("Socket Connection Established with ID :"+ socket.id)
-  socket.on("chat", async function(chat){
-    chat.created = new Date()
-    let response = await new message(chat).save()
-    socket.emit("chat",chat)
-  })
-})
-
-
-
+setupIoConnection(io)

@@ -18,13 +18,48 @@ function getByIds(chatId1, chatId2) {
                 })
         })
 }
-function getById(chatId) {
-    chatId = new ObjectId(chatId)
+function getByUserId(userId) {
+    const id = new ObjectId(userId)
+    console.log({ id })
     return mongoService.connectToDb()
-        .then(dbConn => {
-            const chatCollection = dbConn.collection('chat');
-            return chatCollection.findOne({ _id: chatId })
-        })
+        .then(dbConn =>
+            dbConn.collection('chat').aggregate([
+                {
+
+                    $match: {
+                        usersId: { $in: [id] }
+                    }
+                },
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            let: {
+                                usersId: '$usersId'
+                            },
+                            pipeline: [
+                                {
+                                    $match: {
+                                        $expr: {
+                                            $and: [
+                                                { $ne: ['$_id', id] },
+                                                { $in: ['$_id', '$$usersId'] }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            as: 'users'
+                        }
+                },
+                {
+                    $project: {
+                        _id: false,
+                        users: true
+                    }
+                }
+            ]).toArray().then(res => res[0].users)
+        )
 }
 
 function create(chatId1, chatId2) {
@@ -69,5 +104,5 @@ module.exports = {
     remove,
     update,
     create,
-    getById
+    getByUserId
 }
