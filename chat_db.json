@@ -1,23 +1,23 @@
 [
     {
-
+        "usersId": ["5c03ab749d2411003001ba9c", "5c03ab749d2411003001ba9d"],
         "messages": [
             {
                 "from": "5c03ab749d2411003001ba9c",
-                "to": "5c03ab749d2411003001ba9d",
                 "txt": "hey",
+                "isRead": true,
                 "timestamp": 1543522278729
             },
             {
                 "from": "5c03ab749d2411003001ba9d",
-                "to": "5c03ab749d2411003001ba9c",
                 "txt": "hey",
+                "isRead": true,
                 "timestamp": 1543522278739
             },
             {
                 "from": "5c03ab749d2411003001ba9c",
-                "to": "5c03ab749d2411003001ba9d",
                 "txt": "bye",
+                "isRead": true,
                 "timestamp": 1543522278740
             }
         ]

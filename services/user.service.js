@@ -106,19 +106,17 @@ function getUserBeds(userId) {
                         from: 'bed',
                         localField: '_id',
                         foreignField: 'hostId',
-                        as: 'bed'
+                        as: 'beds'
                     }
-                }, {
-                    $unwind: '$bed'
-                },
+                }, 
                 {
-                    $group:
+                    $project:
                     {
-                        _id: "beds",
-                        beds: { $push: "$bed" }
+                        _id: false,
+                        beds: 1
                     }
                 }
-            ]).toArray()
+            ]).toArray().then(res => res[0].beds)
         )
 }
 
