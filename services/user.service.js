@@ -57,7 +57,8 @@ function updateUser(user) {
     console.log ('objectid' , _id)
     return mongoService.connectToDb()
         .then(dbConn => {
-            return dbConn.collection('user').updateOne({_id}, {$set: {hobbies: user.hobbies,
+            return dbConn.collection('user').updateOne({_id}, {$set: {
+                hobbies: user.hobbies,
                  languages: user.languages,
                  aboutMe: user.aboutMe,
                  age: user.age,
