@@ -35,11 +35,11 @@ function addRoutes(app) {
     //Added update**
 
     app.put('/api/user/:userId', (req, res) => {
-        const user = req.body.newUser;
+        console.log('put api :userid')
+        const user = req.body.user;
         userService.updateUser(user)
             .then(user => {
                 req.session.loggedinUser = user;
-                console.log('app.put in user route')
                 return res.json(user)
             })
             .catch(err => res.status(403).send(err))
