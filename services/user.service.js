@@ -66,6 +66,23 @@ function updateUser(user) {
                 }
             })
             return dbConn.collection('user').findOne({ _id })
+            // const _id = new ObjectId(user._id)
+            // return mongoService.connectToDb()
+            //     .then(dbConn => {
+            //         return dbConn.collection('user')
+            //             .updateOne({_id}, { $set: { user } })
+        })
+}
+
+
+function updateUserChatHistory(chatId, userId) {
+    chatId = new ObjectId(chatId)
+    userId = new ObjectId(userId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const chatCollection = dbConn.collection('user');
+            return chatCollection.updateOne({ _id: userId },
+                { $push: { chatHistory: chatId } })
         })
 }
 
@@ -125,6 +142,7 @@ module.exports = {
     checkLogin,
     addUser,
     getUserBeds,
-    updateUser
+    updateUser,
+    updateUserChatHistory
 }
 
