@@ -21,7 +21,6 @@ function getByUserId(userId) {
         .then(dbConn =>
             dbConn.collection('chat').aggregate([
                 {
-
                     $match: {
                         usersId: { $in: [id] }
                     }

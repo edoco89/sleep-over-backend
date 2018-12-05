@@ -19,7 +19,7 @@ function checkLogin(email, pass) {
                     if (user.password === pass) {
                         return getUserBeds(user._id)
                             .then(beds => {
-                                (beds[0]) ? user.hostBeds = beds[0].beds : user.hostBeds = [];
+                                (beds.length > 0) ? user.hostBeds = beds : user.hostBeds = [];
                                 return user
                             })
                     }
@@ -127,7 +127,7 @@ function getUserBeds(userId) {
                         foreignField: 'hostId',
                         as: 'beds'
                     }
-                }, 
+                },
                 {
                     $project:
                     {
