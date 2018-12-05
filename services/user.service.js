@@ -52,23 +52,43 @@ function addUser(user) {
 // Added update** upsert is true so should be used for add as well
 
 function updateUser(user) {
-    console.log(user)
-    _id = new ObjectId(user._id)
-    console.log ('objectid' , _id)
+    const _id = new ObjectId(user._id)
     return mongoService.connectToDb()
         .then(dbConn => {
-            return dbConn.collection('user').updateOne({_id}, {$set: {hobbies: user.hobbies,
-                 languages: user.languages,
-                 aboutMe: user.aboutMe,
-                 age: user.age,
-                gender: user.gender
-                }})
-                .then(res => {
-                    console.log('userservice age', user.age)
-                    return res.modifiedCount
-                })
+            return dbConn.collection('user')
+                .updateOne({_id}, { $set: { user } })
         })
 }
+
+function updateUserChatHistory(chatId, userId) {
+    chatId = new ObjectId(chatId)
+    userId = new ObjectId(userId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const chatCollection = dbConn.collection('user');
+            return chatCollection.updateOne({ _id: userId },
+                { $push: { chatHistory: chatId } })
+        })
+}
+
+// function updateUser(user) {
+//     console.log(user)
+//     _id = new ObjectId(user._id)
+//     console.log ('objectid' , _id)
+//     return mongoService.connectToDb()
+//         .then(dbConn => {
+//             return dbConn.collection('user').updateOne({_id}, {$set: {hobbies: user.hobbies,
+//                  languages: user.languages,
+//                  aboutMe: user.aboutMe,
+//                  age: user.age,
+//                 gender: user.gender
+//                 }})
+//                 .then(res => {
+//                     console.log('userservice age', user.age)
+//                     return res.modifiedCount
+//                 })
+//         })
+// }
 
 //GET BY ID
 function getById(userId) {
@@ -126,6 +146,7 @@ module.exports = {
     checkLogin,
     addUser,
     getUserBeds,
-    updateUser
+    updateUser,
+    updateUserChatHistory
 }
 

@@ -1,26 +1,22 @@
 const mongoService = require('./mongo.service')
+const userService = require('./user.service')
 const ObjectId = require('mongodb').ObjectId;
 
 
-function getByIds(chatId1, chatId2) {
-    chatId1 = new ObjectId(chatId1)
-    chatId2 = new ObjectId(chatId2)
-    console.log(chatId1, chatId2);
+function getByIds(userId1, userId2) {
+    userId1 = new ObjectId(userId1)
+    userId2 = new ObjectId(userId2)
+    const usersId = [userId1, userId2]
+    usersId.sort((id1, id2) => id1 > id2 ? 1 : -1)
     return mongoService.connectToDb()
         .then(dbConn => {
             const chatCollection = dbConn.collection('chat');
-            return chatCollection.findOne(
-                {
-                    $or: [
-                        { usersId: [chatId1, chatId2] },
-                        { usersId: [chatId2, chatId1] }
-                    ]
-                })
+            return chatCollection.findOne({usersId})
         })
 }
+
 function getByUserId(userId) {
     const id = new ObjectId(userId)
-    console.log({ id })
     return mongoService.connectToDb()
         .then(dbConn =>
             dbConn.collection('chat').aggregate([
@@ -53,29 +49,36 @@ function getByUserId(userId) {
                         }
                 },
                 {
-                    $project: {
-                        _id: false,
-                        users: true
+                    $unwind: '$users'
+                },
+                {
+                    $group: {
+                        _id: 'usersId',
+                        users: {$push: '$users'}
                     }
                 }
-            ]).toArray().then(res => res[0].users)
+            ]).toArray()
+            .then(res => res[0].users)
         )
 }
 
-function create(chatId1, chatId2) {
-    chatId1 = new ObjectId(chatId1)
-    chatId2 = new ObjectId(chatId2)
-    const usersId = [chatId1, chatId2]
+function create(userId1, userId2) {
+    userId1 = new ObjectId(userId1)
+    userId2 = new ObjectId(userId2)
+    const usersId = [userId1, userId2]
     usersId.sort((id1, id2) => id1 > id2 ? 1 : -1)
-    console.log(chatId1, chatId2);
     return mongoService.connectToDb()
-        .then(dbConn => {
+        .then(async dbConn => {
             const chatCollection = dbConn.collection('chat');
-            return chatCollection.insertOne(
+            const result = await chatCollection.insertOne(
                 {
                     usersId,
                     messages: []
                 })
+            const chatId = result.insertedId
+            userService.updateUserChatHistory(chatId, userId1)
+            userService.updateUserChatHistory(chatId, userId2)
+            return chatCollection.findOne({usersId})
         })
 }
 
@@ -89,11 +92,10 @@ function remove(chatId) {
 }
 function update(chatId, message) {
     chatId = new ObjectId(chatId)
-    console.log(chatId, message);
     return mongoService.connectToDb()
         .then(dbConn => {
             const chatCollection = dbConn.collection('chat');
-            chatCollection.update({ _id: chatId },
+            chatCollection.updateOne({ _id: chatId },
                 { $push: { messages: message } })
             return chatCollection.findOne({ _id: chatId })
         })
