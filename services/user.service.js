@@ -19,7 +19,7 @@ function checkLogin(email, pass) {
                     if (user.password === pass) {
                         return getUserBeds(user._id)
                             .then(beds => {
-                                (beds[0]) ? user.hostBeds = beds[0].beds : user.hostBeds = [];
+                                (beds.length > 0) ? user.hostBeds = beds : user.hostBeds = [];
                                 return user
                             })
                     }
@@ -53,7 +53,7 @@ function addUser(user) {
 
 function updateUser(user) {
     _id = new ObjectId(user._id)
-    console.log ('objectid' , _id)
+    console.log('objectid', _id)
     return mongoService.connectToDb()
         .then(dbConn => {
             return dbConn.collection('user').updateOne({_id}, {$set: {
@@ -107,7 +107,7 @@ function getUserBeds(userId) {
                         foreignField: 'hostId',
                         as: 'beds'
                     }
-                }, 
+                },
                 {
                     $project:
                     {
