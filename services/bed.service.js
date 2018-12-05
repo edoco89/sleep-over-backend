@@ -70,11 +70,11 @@ function addBed(bed) {
 //built currently only for reviews
 
 function updateBedReviews(reviews, bedId) {
-    console.log(reviews)
-    // _id = new ObjectId(reviews[reviews.length - 1].bedId)
+    console.log('bedservice server side', reviews)
+    _id = new ObjectId(bedId)
     return mongoService.connectToDb()
         .then(dbConn => {
-            return dbConn.collection('bed').updateOne({ _id: bedId}, { $set: { reviews } })
+            return dbConn.collection('bed').updateOne({ _id }, { $set: { reviews } })
                 .then(res => {
                     console.log('action complete review')
                     return res.modifiedCount
