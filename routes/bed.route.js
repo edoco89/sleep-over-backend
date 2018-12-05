@@ -15,6 +15,14 @@ function addRoutes(app) {
             .then(beds => res.json(beds))
     });
 
+    //update bed with new review
+    app.post('/api/bed/:bedId', (req, res) => {
+        console.log('server side post bed route', req)
+        const bedId = req.params.bedId;
+        const reviews = req.body.reviews
+        bedService.updateBedReviews(reviews, bedId)
+    });
+
     app.get('/api/bed/:bedId', (req, res) => {
         const bedId = req.params.bedId;
         bedService.getById(bedId)

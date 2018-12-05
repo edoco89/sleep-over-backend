@@ -52,7 +52,6 @@ function addUser(user) {
 // Added update** upsert is true so should be used for add as well
 
 function updateUser(user) {
-    console.log(user)
     _id = new ObjectId(user._id)
     console.log ('objectid' , _id)
     return mongoService.connectToDb()

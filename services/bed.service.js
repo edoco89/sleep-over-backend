@@ -67,9 +67,25 @@ function addBed(bed) {
         })
 }
 
+//built currently only for reviews
+
+function updateBedReviews(reviews, bedId) {
+    console.log(reviews)
+    // _id = new ObjectId(reviews[reviews.length - 1].bedId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            return dbConn.collection('bed').updateOne({ _id: bedId}, { $set: { reviews } })
+                .then(res => {
+                    console.log('action complete review')
+                    return res.modifiedCount
+                })
+        })
+}
+
 module.exports = {
     query,
     getById,
     remove,
-    addBed
+    addBed,
+    updateBedReviews
 }
