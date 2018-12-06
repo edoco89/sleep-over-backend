@@ -22,14 +22,11 @@ function setupIO(io) {
             var chat = findChat(chatId);
             if (!chat) {
                 chat = createChat(chatId, currUserId, userId);
-                // userService.updateUserChatHistory(chatId, currUserId)
-                // userService.updateUserChatHistory(chatId, userId)
                 gChats.push(chat);
             }
             socket.join(chatId);
             io.to(chatId).emit('userConnected', userId);
         })
-
         socket.on('sendMsg', ({ chatId, message }) => {
             chatService.update(chatId, message)
             io.to(chatId).emit('getMsg', message)
