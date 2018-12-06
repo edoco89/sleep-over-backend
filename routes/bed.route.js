@@ -12,7 +12,7 @@ function addRoutes(app) {
     app.post('/api/bed', (req, res) => {
         const bed = req.body.bed;
         bedService.addBed(bed)
-            .then(beds => res.json(beds))
+            .then(bed => res.json(bed))
     });
 
     //update bed with new review
