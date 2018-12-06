@@ -27,9 +27,16 @@ function setupIO(io) {
             socket.join(chatId);
             io.to(chatId).emit('userConnected', userId);
         })
-        socket.on('sendMsg', ({ chatId, message }) => {
-            chatService.update(chatId, message)
+        socket.on('sendMsg', ({ chatId, message, userId }) => {
+            chatService.sendNewMsg(chatId, message)
+            userService.updateUserNewMsg(userId, 1)
             io.to(chatId).emit('getMsg', message)
+            socket.to(chatId).emit('setNewMsg', 1)
+        })
+
+        socket.on('setNewMsg', ({ chatId, userId, number }) => {
+            userService.updateUserNewMsg(userId, +number)
+            socket.to(chatId).emit('setNewMsg', +number)
         })
 
     })
