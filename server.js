@@ -7,7 +7,9 @@ const addUserRoutes = require('./routes/user.route')
 const session = require('express-session')
 const cors = require('cors')
 var http = require('http').Server(app);
-var io = require('socket.io').listen(http, {origins: 'http://localhost:8080'});
+var io = process.env.PORT
+  ? require('socket.io').listen(http)
+  : require('socket.io').listen(http, {origins: ['', 'http://localhost:8080']});
 
 app.use(express.static('public'));
 
@@ -31,11 +33,11 @@ addChatRoutes(app)
 
 const port = process.env.PORT || 3000;
 
+const setupIoConnection = require('./services/socket.service')
+
+setupIoConnection(io)
 
 http.listen(port, () => {
   console.log(`App listening on port ${port}!`)
 });
 
-const setupIoConnection = require('./services/socket.service')
-
-setupIoConnection(io)
