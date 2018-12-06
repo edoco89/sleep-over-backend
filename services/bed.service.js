@@ -12,7 +12,7 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
                 'location.coords': {
                     $near: {
                         $geometry:
-                            { type: "Point", coordinates: [+byLng, +byLat] }, $maxDistance: 2000
+                            { type: "Point", coordinates: [+byLng, +byLat] }, $maxDistance: 22000
                     }
                 }
             }
