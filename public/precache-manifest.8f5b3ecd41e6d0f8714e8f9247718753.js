@@ -8,8 +8,8 @@ self.__precacheManifest = [
     "url": "/js/about.dbc2d5ba.js"
   },
   {
-    "revision": "f04ef4c386b28678b020",
-    "url": "/js/app.364e34ac.js"
+    "revision": "7457c9a22da90911ab98",
+    "url": "/js/app.415d6bb2.js"
   },
   {
     "revision": "735ab4f94fbcd57074377afca324c813",
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/img/friends-sofa.jpg"
   },
   {
-    "revision": "829a148777d6ee6560684e51b0e8e86d",
+    "revision": "41f18b85caba409b7823781579256edc",
     "url": "/index.html"
   },
   {
@@ -112,7 +112,7 @@ self.__precacheManifest = [
     "url": "/css/chunk-vendors.3d79cef9.css"
   },
   {
-    "revision": "f04ef4c386b28678b020",
-    "url": "/css/app.0c6ae256.css"
+    "revision": "7457c9a22da90911ab98",
+    "url": "/css/app.7dada1ce.css"
   }
 ];
