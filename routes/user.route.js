@@ -35,7 +35,6 @@ function addRoutes(app) {
     //Added update**
 
     app.put('/api/user/:userId', (req, res) => {
-        console.log('put api :userid')
         const user = req.body.user;
         userService.updateUser(user)
             .then(user => {

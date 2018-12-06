@@ -12,7 +12,7 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
                 'location.coords': {
                     $near: {
                         $geometry:
-                            { type: "Point", coordinates: [+byLng, +byLat] }, $maxDistance: 22000
+                            { type: "Point", coordinates: [+byLng, +byLat] }, $maxDistance: 20000
                     }
                 }
             }
@@ -57,13 +57,13 @@ function remove(bedId) {
 
 function addBed(bed) {
     bed.hostId = new ObjectId(bed.hostId)
+    const _id = new ObjectId(bed._id)
+    delete bed._id;
     return mongoService.connectToDb()
         .then(dbConn => {
-            return dbConn.collection('bed').insertOne(bed)
-                .then(res => {
-                    bed._id = res.insertedId
-                    return bed
-                })
+            dbConn.collection('bed').updateOne({ _id },
+                { $set: { ...bed } }, { upsert: true })
+            return dbConn.collection('bed').findOne({ _id })
         })
 }
 
