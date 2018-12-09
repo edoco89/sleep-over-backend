@@ -57,7 +57,7 @@ function getByUserId(userId) {
                     }
                 }
             ]).toArray()
-            .then(res => res[0].users)
+            .then(res => (res[0]) ? res[0].users : [])
         )
 }
 
