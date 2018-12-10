@@ -11,6 +11,8 @@ var io = process.env.PORT
   ? require('socket.io').listen(http)
   : require('socket.io').listen(http, {origins: ['', 'http://localhost:8080']});
 
+  //var io should be addressed - according to chen it's a dirty fix
+
 app.use(express.static('public'));
 
 app.use(bodyParser.json());

@@ -62,7 +62,8 @@ function updateUser(user) {
                     aboutMe: user.aboutMe,
                     age: user.age,
                     gender: user.gender,
-                    imgUrl: user.imgUrl
+                    imgUrl: user.imgUrl,
+                    newMsg: user.newMsg
                 }
             })
             return dbConn.collection('user').findOne({ _id })
@@ -83,6 +84,16 @@ function updateUserChatHistory(chatId, userId) {
             const chatCollection = dbConn.collection('user');
             return chatCollection.updateOne({ _id: userId },
                 { $push: { chatHistory: chatId } })
+        })
+}
+
+function updateUserNewMsg(userId, num) {
+    userId = new ObjectId(userId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const chatCollection = dbConn.collection('user');
+            return chatCollection.updateOne({ _id: userId },
+                { $inc: { newMsg: num } })
         })
 }
 
@@ -143,6 +154,7 @@ module.exports = {
     addUser,
     getUserBeds,
     updateUser,
-    updateUserChatHistory
+    updateUserChatHistory,
+    updateUserNewMsg
 }
 

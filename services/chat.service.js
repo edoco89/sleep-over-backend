@@ -57,7 +57,7 @@ function getByUserId(userId) {
                     }
                 }
             ]).toArray()
-            .then(res => res[0].users)
+            .then(res => (res[0]) ? res[0].users : [])
         )
 }
 
@@ -89,7 +89,18 @@ function remove(chatId) {
             return chatCollection.remove({ _id: chatId })
         })
 }
-function update(chatId, message) {
+function sendNewMsg(chatId, message) {
+    chatId = new ObjectId(chatId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const chatCollection = dbConn.collection('chat');
+            chatCollection.updateOne({ _id: chatId },
+                { $push: { messages: message } })
+            return chatCollection.findOne({ _id: chatId })
+        })
+}
+
+function udateNewMsg(chatId, message) {
     chatId = new ObjectId(chatId)
     return mongoService.connectToDb()
         .then(dbConn => {
@@ -103,7 +114,7 @@ function update(chatId, message) {
 module.exports = {
     getByIds,
     remove,
-    update,
+    sendNewMsg,
     create,
     getByUserId
 }
