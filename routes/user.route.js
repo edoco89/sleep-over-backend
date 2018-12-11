@@ -21,6 +21,11 @@ function addRoutes(app) {
             .catch(err => res.status(401).send(err))
     })
 
+    //LOGOUT
+    app.delete(`/api/user/logout`, (req, res) => {
+        req.session.destroy();
+    })
+
     //SIGNUP
     app.post('/api/user/signup', (req, res) => {
         const user = req.body.newUser;
