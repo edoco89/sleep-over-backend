@@ -11,7 +11,7 @@ function getByIds(userId1, userId2) {
     return mongoService.connectToDb()
         .then(dbConn => {
             const chatCollection = dbConn.collection('chat');
-            return chatCollection.findOne({usersId})
+            return chatCollection.findOne({ usersId })
         })
 }
 
@@ -53,11 +53,11 @@ function getByUserId(userId) {
                 {
                     $group: {
                         _id: 'usersId',
-                        users: {$push: '$users'}
+                        users: { $push: '$users' }
                     }
                 }
             ]).toArray()
-            .then(res => (res[0]) ? res[0].users : [])
+                .then(res => (res.length > 0) ? res[0].users : [])
         )
 }
 
@@ -77,7 +77,7 @@ function create(userId1, userId2) {
             const chatId = result.insertedId
             userService.updateUserChatHistory(chatId, userId1)
             userService.updateUserChatHistory(chatId, userId2)
-            return chatCollection.findOne({usersId})
+            return chatCollection.findOne({ usersId })
         })
 }
 
@@ -96,7 +96,6 @@ function sendNewMsg(chatId, message) {
             const chatCollection = dbConn.collection('chat');
             chatCollection.updateOne({ _id: chatId },
                 { $push: { messages: message } })
-            return chatCollection.findOne({ _id: chatId })
         })
 }
 
@@ -111,10 +110,28 @@ function udateNewMsg(chatId, message) {
         })
 }
 
+function udateNewMsgPerChat(chatId, userId) {
+    chatId = new ObjectId(chatId)
+    return mongoService.connectToDb()
+        .then(dbConn => {
+            const chatCollection = dbConn.collection('chat');
+            chatCollection.findOneAndUpdate({ _id: chatId }, {
+                $set: {
+                    'messages.$[msg].isRead': true
+                }
+            },
+                {
+                    multi: true,
+                    arrayFilters: [{ 'msg.from': userId }],
+                })
+        })
+}
+
 module.exports = {
     getByIds,
     remove,
     sendNewMsg,
     create,
-    getByUserId
+    getByUserId,
+    udateNewMsgPerChat
 }

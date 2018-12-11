@@ -61,8 +61,6 @@ function addRoutes(app) {
     //USER BY ID
     app.get('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;
-        console.log('!!!!', userId);
-
         userService.getById(userId)
             .then(user => res.json(user))
     })

@@ -9,7 +9,7 @@ const cors = require('cors')
 var http = require('http').Server(app);
 var io = process.env.PORT
   ? require('socket.io').listen(http)
-  : require('socket.io').listen(http, {origins: ['', 'http://localhost:8080']});
+  : require('socket.io').listen(http, {origins: 'http://localhost:8080'});
 
 app.use(express.static('public'));
 

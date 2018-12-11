@@ -2,6 +2,7 @@ const chatService = require('./chat.service')
 const userService = require('./user.service')
 const ObjectId = require('mongodb').ObjectId;
 const gChats = [];
+const idToSocket = {};
 
 const findChat = (chatId) =>
     gChats.find(chat => chat.id === chatId);
@@ -16,27 +17,52 @@ const createChat = (chatId, currUserId, userId) => ({
 
 function setupIO(io) {
     io.on('connection', socket => {
+        let loggedInUserId = null;
+        socket.on('loggedIn', async (userId) => {
+            loggedInUserId = userId;
+            idToSocket[userId] = socket.id;
+            let user = await userService.updateUserNewMsg(loggedInUserId, 0)
+            socket.emit('setNewMsg', {number: user.newMsg})
+        })
+        socket.on('loggedOut', () => {
+            delete idToSocket[loggedInUserId];
+            loggedInUserId = null;
+        })
         socket.on('chatRequest', ({ currUserId, userId, chatId }) => {
-            console.log('chatRequest', currUserId, userId, chatId )
-            chatService.getById
             var chat = findChat(chatId);
             if (!chat) {
                 chat = createChat(chatId, currUserId, userId);
                 gChats.push(chat);
+                const userSocketId = idToSocket[userId];
+                if (userSocketId) {
+                    io.to(userSocketId).emit('newChat')
+                }
             }
             socket.join(chatId);
-            io.to(chatId).emit('userConnected', userId);
-        })
-        socket.on('sendMsg', ({ chatId, message, userId }) => {
-            chatService.sendNewMsg(chatId, message)
-            userService.updateUserNewMsg(userId, 1)
-            io.to(chatId).emit('getMsg', message)
-            socket.to(chatId).emit('setNewMsg', 1)
+            io.to(idToSocket[userId]).emit('newChat')
         })
 
-        socket.on('setNewMsg', ({ chatId, userId, number }) => {
-            userService.updateUserNewMsg(userId, +number)
-            socket.to(chatId).emit('setNewMsg', +number)
+        socket.on('sendMsg', async ({ chatId, message, userId }) => {
+            chatService.sendNewMsg(chatId, message)
+            const toUserId = findChat(chatId).members.find(id => id !== userId);
+            const userSocketId = idToSocket[toUserId];
+            let user = await userService.updateUserNewMsg(toUserId, 1)
+            socket.emit('getMsg', {message, chatId})
+            io.to(userSocketId).emit('getMsg', {message, chatId})
+            io.to(userSocketId).emit('setNewMsg', {number: user.newMsg})
+        })
+
+        socket.on('setNewMsgPerChatL', async ({ chatId, userId, number }) => {
+            const currUserId = findChat(chatId).members.find(id => id !== userId);
+            const userSocketId = idToSocket[currUserId];
+            chatService.udateNewMsgPerChat(chatId, userId);
+            let user = await userService.updateUserNewMsg(currUserId, -number)
+            socket.emit('setNewMsg', {number: user.newMsg})
+            socket.emit('setNewMsgPerChat', {userId} )
+        }),
+        socket.on('disconnect', () => {
+            if (!loggedInUserId) return
+            delete idToSocket[loggedInUserId]
         })
 
     })
