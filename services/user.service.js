@@ -81,8 +81,8 @@ function updateUserChatHistory(chatId, userId) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
         .then(dbConn => {
-            const chatCollection = dbConn.collection('user');
-            return chatCollection.updateOne({ _id: userId },
+            const userCollection = dbConn.collection('user');
+            return userCollection.updateOne({ _id: userId },
                 { $push: { chatHistory: chatId } })
         })
 }
@@ -90,10 +90,11 @@ function updateUserChatHistory(chatId, userId) {
 function updateUserNewMsg(userId, num) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
-        .then(dbConn => {
-            const chatCollection = dbConn.collection('user');
-            return chatCollection.updateOne({ _id: userId },
+        .then(async dbConn => {
+            const userCollection = dbConn.collection('user');
+            await userCollection.updateOne({ _id: userId },
                 { $inc: { newMsg: num } })
+            return userCollection.findOne({ _id: userId })
         })
 }
 
@@ -128,19 +129,19 @@ function getUserBeds(userId) {
                 },
                 {
                     $lookup:
-                    {
-                        from: 'bed',
-                        localField: '_id',
-                        foreignField: 'hostId',
-                        as: 'beds'
-                    }
+                        {
+                            from: 'bed',
+                            localField: '_id',
+                            foreignField: 'hostId',
+                            as: 'beds'
+                        }
                 },
                 {
                     $project:
-                    {
-                        _id: false,
-                        beds: 1
-                    }
+                        {
+                            _id: false,
+                            beds: 1
+                        }
                 }
             ]).toArray().then(res => res[0].beds)
         )
