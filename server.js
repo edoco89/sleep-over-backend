@@ -9,11 +9,11 @@ const cors = require('cors')
 var http = require('http').Server(app);
 var io = process.env.PORT
   ? require('socket.io').listen(http)
-  : require('socket.io').listen(http, {origins: 'http://localhost:8080'});
+  : require('socket.io').listen(http, { origins: 'http://localhost:8080' });
+var history = require('connect-history-api-fallback');
 
-  //var io should be addressed - according to chen it's a dirty fix
+//var io should be addressed - according to chen it's a dirty fix
 
-app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
@@ -27,11 +27,13 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }))
-
+app.use(history());
 
 addBedRoutes(app)
 addUserRoutes(app)
 addChatRoutes(app)
+
+app.use(express.static('public'));
 
 const port = process.env.PORT || 3000;
 
