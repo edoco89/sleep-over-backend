@@ -57,7 +57,7 @@ function updateUser(user) {
         .then(dbConn => {
             dbConn.collection('user').updateOne({ _id }, {
                 $set: {
-                    hobbies: user.hobbies,
+                    interests: user.interests,
                     languages: user.languages,
                     aboutMe: user.aboutMe,
                     age: user.age,

@@ -37,6 +37,8 @@ function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, a
             return bedCollection.find(queryObj).sort({ [sortBy.type]: sortBy.order }).toArray()
         })
 }
+
+
 function getById(bedId) {
     bedId = new ObjectId(bedId)
     return mongoService.connectToDb()
@@ -67,7 +69,6 @@ function addBed(bed) {
         })
 }
 
-//built currently only for reviews
 
 function updateBedReviews(reviews, bedId) {
     console.log('bedservice server side', reviews)
