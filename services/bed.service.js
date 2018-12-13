@@ -57,7 +57,7 @@ function remove(bedId) {
 }
 
 
-function addBed(bed) {
+function saveBed(bed) {
     bed.hostId = new ObjectId(bed.hostId)
     const _id = new ObjectId(bed._id)
     delete bed._id;
@@ -87,6 +87,6 @@ module.exports = {
     query,
     getById,
     remove,
-    addBed,
+    saveBed,
     updateBedReviews
 }

@@ -25,6 +25,7 @@ function setupIO(io) {
             idToSocket[userId] = socket.id;
             let user = await userService.updateUserNewMsg(loggedInUserId, 0)
             socket.emit('setNewMsg', {number: user.newMsg})
+            socket.emit('setNewBookRequest', {number: user.newBookRequest})
             console.log('logging in', {loggedInUserId, socketId: socket.id})
         })
 
@@ -59,11 +60,23 @@ function setupIO(io) {
 
         socket.on('setNewMsgPerChatL', async ({ chatId, userId, number }) => {
             const currUserId = findChat(chatId).members.find(id => id !== userId);
-            // const userSocketId = [currUserId];
             chatService.udateNewMsgPerChat(chatId, userId);
             let user = await userService.updateUserNewMsg(currUserId, -number)
             socket.emit('setNewMsg', {number: user.newMsg})
             socket.emit('setNewMsgPerChat', {userId} )
+        })
+
+        socket.on('bookRequest', async ({hostId}) => {
+            const userSocketId = idToSocket[hostId];
+            const hostBeds = await userService.getUserBeds(hostId)
+            let user = await userService.updateUserNewBookRequest(hostId, 1)
+            io.to(userSocketId).emit('getBookRequest', {hostBeds})
+            io.to(userSocketId).emit('setNewBookRequest', {number: user.newBookRequest})
+        })
+
+        socket.on('setNewBookRequestL', async ({userId}) => {
+            let user = await userService.updateUserNewBookRequest(userId, -1)
+            socket.emit('setNewBookRequest', {number: user.newBookRequest})
         })
 
         socket.on('disconnect', () => {
