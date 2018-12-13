@@ -11,7 +11,7 @@ function addRoutes(app) {
 
     app.post('/api/bed', (req, res) => {
         const bed = req.body.bed;
-        bedService.addBed(bed)
+        bedService.saveBed(bed)
             .then(bed => res.json(bed))
     });
 

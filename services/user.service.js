@@ -11,14 +11,18 @@ function query() {
 }
 
 //LOGIN
-function checkLogin(email, pass) {
+function checkLogin(email, password) {
     return mongoService.connectToDb()
         .then(dbConn => {
             return dbConn.collection('user').findOne({ email })
                 .then(user => {
-                    if (user.password === pass) {
+                    console.log('check loggedIn ', email, password);
+                    
+                    if (user.password === password) {
                         return getUserBeds(user._id)
                             .then(beds => {
+                                console.log(user, 'ggggggg');
+                                
                                 (beds.length > 0) ? user.hostBeds = beds : user.hostBeds = [];
                                 return user
                             })
@@ -98,6 +102,18 @@ function updateUserNewMsg(userId, num) {
         })
 }
 
+function updateUserNewBookRequest(userId, num) {
+    userId = new ObjectId(userId)
+    return mongoService.connectToDb()
+        .then(async dbConn => {
+            const userCollection = dbConn.collection('user');
+            await userCollection.updateOne({ _id: userId },
+                { $inc: { newBookRequest: num } })
+            return userCollection.findOne({ _id: userId })
+        })
+}
+
+
 //GET BY ID
 function getById(userId) {
     userId = new ObjectId(userId)
@@ -156,6 +172,7 @@ module.exports = {
     getUserBeds,
     updateUser,
     updateUserChatHistory,
-    updateUserNewMsg
+    updateUserNewMsg,
+    updateUserNewBookRequest
 }
 

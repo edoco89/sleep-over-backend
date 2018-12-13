@@ -12,10 +12,10 @@ function addRoutes(app) {
 
     //LOGIN
     app.post('/api/user/login', (req, res) => {
-        const { email, pass } = req.body;
-        userService.checkLogin(email, pass)
+        const { email, password } = req.body;
+        userService.checkLogin(email, password)
             .then(user => {
-                req.session.loggedinUser = user;
+                req.session.loggedInUser = { email: user.email, password: user.password };
                 return res.json(user);
             })
             .catch(err => res.status(401).send(err))
@@ -31,7 +31,7 @@ function addRoutes(app) {
         const user = req.body.newUser;
         userService.addUser(user)
             .then(user => {
-                req.session.loggedinUser = user;
+                req.session.loggedInUser = { email: user.email, password: user.password };
                 return res.json(user)
             })
             .catch(err => res.status(403).send(err))
@@ -43,7 +43,7 @@ function addRoutes(app) {
         const user = req.body.user;
         userService.updateUser(user)
             .then(user => {
-                req.session.loggedinUser = user;
+                req.session.loggedInUser = { email: user.email, password: user.password };
                 return res.json(user)
             })
             .catch(err => res.status(403).send(err))
