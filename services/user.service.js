@@ -16,13 +16,9 @@ function checkLogin(email, password) {
         .then(dbConn => {
             return dbConn.collection('user').findOne({ email })
                 .then(user => {
-                    console.log('check loggedIn ', email, password);
-                    
                     if (user.password === password) {
                         return getUserBeds(user._id)
                             .then(beds => {
-                                console.log(user, 'ggggggg');
-                                
                                 (beds.length > 0) ? user.hostBeds = beds : user.hostBeds = [];
                                 return user
                             })
