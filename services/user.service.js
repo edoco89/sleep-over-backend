@@ -98,6 +98,17 @@ function updateUserNewMsg(userId, num) {
         })
 }
 
+function updateUserStays(guestId, sleepOver) {
+    guestId = new ObjectId(guestId)
+    return mongoService.connectToDb()
+        .then(async dbConn => {
+            const userCollection = dbConn.collection('user');
+            await userCollection.updateOne({ _id: guestId },
+                { $push: { stays: sleepOver } })
+            return userCollection.findOne({ _id: guestId })
+        })
+}
+
 function updateUserNewBookRequest(userId, num) {
     userId = new ObjectId(userId)
     return mongoService.connectToDb()
@@ -169,6 +180,7 @@ module.exports = {
     updateUser,
     updateUserChatHistory,
     updateUserNewMsg,
-    updateUserNewBookRequest
+    updateUserNewBookRequest,
+    updateUserStays
 }
 

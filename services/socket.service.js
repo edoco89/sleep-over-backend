@@ -74,8 +74,14 @@ function setupIO(io) {
             io.to(userSocketId).emit('setNewBookRequest', {number: user.newBookRequest})
         })
 
-        socket.on('setNewBookRequestL', async ({userId}) => {
+        socket.on('setNewBookRequestL', async ({userId, guestId = null, sleepOver = {}}) => {
             let user = await userService.updateUserNewBookRequest(userId, -1)
+            if (guestId) {
+                console.log(sleepOver, 'book-approve');
+                const userSocketId = idToSocket[guestId];
+                let guest = await userService.updateUserStays(guestId, sleepOver)
+                io.to(userSocketId).emit('setUserStays', {stays: guest.stays })
+            }
             socket.emit('setNewBookRequest', {number: user.newBookRequest})
         })
 
