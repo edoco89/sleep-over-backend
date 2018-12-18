@@ -22,7 +22,7 @@ function addRoutes(app) {
     })
 
     //LOGOUT
-    app.delete(`/api/user/logout`, (req, res) => {
+    app.get(`/api/user/logout`, (req, res) => {
         req.session.destroy();
     })
 
