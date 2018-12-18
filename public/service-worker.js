@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.77b41475ffaa4dc1230d45beac1cacbb.js"
+  "/precache-manifest.9bfd89d94cb5d6a78c6e0b930f0cb866.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "sleep-over"});
