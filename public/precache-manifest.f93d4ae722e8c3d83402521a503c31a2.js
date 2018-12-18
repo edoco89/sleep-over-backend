@@ -1,35 +1,35 @@
 self.__precacheManifest = [
   {
-    "revision": "a57bf31d5e94a758c57f328e9ca3270f",
-    "url": "/fonts/Cookie-Regular.a57bf31d.ttf"
+    "revision": "575e4317521b381ac94c0c8207c81979",
+    "url": "/fonts/Raleway-Bold.575e4317.ttf"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/robots.txt"
   },
   {
-    "revision": "78132c6450403faefc3f440b2bb3b24a",
-    "url": "/fonts/DancingScript-Regular.78132c64.ttf"
+    "revision": "324944d6dae53ea48a648b1d44ec78c3",
+    "url": "/fonts/Pacifico-Regular.324944d6.ttf"
   },
   {
-    "revision": "a368b26c91716065921e",
-    "url": "/js/app.3c76bd2c.js"
+    "revision": "e77c9b6dc60bf446707e",
+    "url": "/js/app.53bd8d09.js"
   },
   {
     "revision": "2516f4ddfb09afe27a0a",
     "url": "/js/chunk-vendors.2127ab36.js"
   },
   {
-    "revision": "324944d6dae53ea48a648b1d44ec78c3",
-    "url": "/fonts/Pacifico-Regular.324944d6.ttf"
+    "revision": "b1bdea561f247adc2c904f5b24a07c51",
+    "url": "/fonts/Raleway-Light.b1bdea56.ttf"
   },
   {
     "revision": "444e27eade4f3960f66f",
     "url": "/js/about.8b907bfe.js"
   },
   {
-    "revision": "575e4317521b381ac94c0c8207c81979",
-    "url": "/fonts/Raleway-Bold.575e4317.ttf"
+    "revision": "909ea5323764b3b3a2bfaec08e035a4e",
+    "url": "/fonts/Courgette-Regular.909ea532.ttf"
   },
   {
     "revision": "4f1088444b5962b2856bc8a0beb7fc47",
@@ -68,19 +68,19 @@ self.__precacheManifest = [
     "url": "/img/friends-hang.jpg"
   },
   {
-    "revision": "344fe821fe549832a7e36eabe4b728f8",
-    "url": "/img/happy-glasses.png"
+    "revision": "f57640df52bd1ad6ad0f7a63eb0032b1",
+    "url": "/img/friends-sofa.jpg"
   },
   {
     "revision": "76f33eeecb9ff07852cf91e7cc4fc235",
     "url": "/img/telAviv.76f33eee.png"
   },
   {
-    "revision": "f57640df52bd1ad6ad0f7a63eb0032b1",
-    "url": "/img/friends-sofa.jpg"
+    "revision": "344fe821fe549832a7e36eabe4b728f8",
+    "url": "/img/happy-glasses.png"
   },
   {
-    "revision": "67af65b2ca098c5c6b4fc787170983c8",
+    "revision": "ddbd324372535f6dc02d4381c0c76eca",
     "url": "/index.html"
   },
   {
@@ -100,10 +100,6 @@ self.__precacheManifest = [
     "url": "/fonts/element-icons.2fad952a.woff"
   },
   {
-    "revision": "b1bdea561f247adc2c904f5b24a07c51",
-    "url": "/fonts/Raleway-Light.b1bdea56.ttf"
-  },
-  {
     "revision": "5771ceaf12961b3c26914a70e18dcca8",
     "url": "/fonts/PatrickHand-Regular.5771ceaf.ttf"
   },
@@ -116,15 +112,19 @@ self.__precacheManifest = [
     "url": "/fonts/GloriaHallelujah.25d5fb55.ttf"
   },
   {
-    "revision": "909ea5323764b3b3a2bfaec08e035a4e",
-    "url": "/fonts/Courgette-Regular.909ea532.ttf"
+    "revision": "78132c6450403faefc3f440b2bb3b24a",
+    "url": "/fonts/DancingScript-Regular.78132c64.ttf"
+  },
+  {
+    "revision": "a57bf31d5e94a758c57f328e9ca3270f",
+    "url": "/fonts/Cookie-Regular.a57bf31d.ttf"
   },
   {
     "revision": "2516f4ddfb09afe27a0a",
     "url": "/css/chunk-vendors.a658d5aa.css"
   },
   {
-    "revision": "a368b26c91716065921e",
-    "url": "/css/app.dcd9fda7.css"
+    "revision": "e77c9b6dc60bf446707e",
+    "url": "/css/app.723e87ac.css"
   }
 ];
