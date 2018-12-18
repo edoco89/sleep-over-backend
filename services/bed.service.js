@@ -62,8 +62,8 @@ function saveBed(bed) {
     const _id = new ObjectId(bed._id)
     delete bed._id;
     return mongoService.connectToDb()
-        .then(dbConn => {
-            dbConn.collection('bed').updateOne({ _id },
+        .then(async dbConn => {
+            await dbConn.collection('bed').updateOne({ _id },
                 { $set: { ...bed } }, { upsert: true })
             return dbConn.collection('bed').findOne({ _id })
         })

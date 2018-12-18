@@ -37,8 +37,7 @@ function addRoutes(app) {
             .catch(err => res.status(403).send(err))
     })
 
-    //Added update**
-
+    //Added update
     app.put('/api/user/:userId', (req, res) => {
         const user = req.body.user;
         userService.updateUser(user)

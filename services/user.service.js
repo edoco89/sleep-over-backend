@@ -52,26 +52,13 @@ function addUser(user) {
 // Added update** upsert is true so should be used for add as well
 
 function updateUser(user) {
-    var _id = new ObjectId(user._id)
+    const _id = new ObjectId(user._id)
+    delete user._id;
     return mongoService.connectToDb()
-        .then(dbConn => {
-            dbConn.collection('user').updateOne({ _id }, {
-                $set: {
-                    interests: user.interests,
-                    languages: user.languages,
-                    aboutMe: user.aboutMe,
-                    age: user.age,
-                    gender: user.gender,
-                    imgUrl: user.imgUrl,
-                    newMsg: user.newMsg
-                }
-            })
+        .then(async dbConn => {
+            await dbConn.collection('user').updateOne({ _id },
+                { $set: { ...user } })
             return dbConn.collection('user').findOne({ _id })
-            // const _id = new ObjectId(user._id)
-            // return mongoService.connectToDb()
-            //     .then(dbConn => {
-            //         return dbConn.collection('user')
-            //             .updateOne({_id}, { $set: { user } })
         })
 }
 
@@ -152,19 +139,19 @@ function getUserBeds(userId) {
                 },
                 {
                     $lookup:
-                        {
-                            from: 'bed',
-                            localField: '_id',
-                            foreignField: 'hostId',
-                            as: 'beds'
-                        }
+                    {
+                        from: 'bed',
+                        localField: '_id',
+                        foreignField: 'hostId',
+                        as: 'beds'
+                    }
                 },
                 {
                     $project:
-                        {
-                            _id: false,
-                            beds: 1
-                        }
+                    {
+                        _id: false,
+                        beds: 1
+                    }
                 }
             ]).toArray().then(res => res[0].beds)
         )
