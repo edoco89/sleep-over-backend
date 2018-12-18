@@ -57,7 +57,7 @@ function addRoutes(app) {
     })
 
     //DELETE- WORKS. NOT IN USE CURRENTLY
-    app.delete('/api/user/:userId', (req, res) => {
+    app.post('/api/user/:userId', (req, res) => {
         const userId = req.params.userId;
         userService.remove(userId)
             .then(() => res.end())
