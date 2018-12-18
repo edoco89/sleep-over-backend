@@ -1,11 +1,12 @@
 const mongoService = require('./mongo.service')
 const ObjectId = require('mongodb').ObjectId;
 
-function query({ byLat = 32.0853, byLng = 34.7818, type = 'rating', order = 1, accessibility = false,
+function query({ byLat = null, byLng = null, type = 'rating', order = 1, accessibility = false,
     wifi = false, acceptsPets = false, airConditioner = false, shampoo = false, parking = false, children = false,
     byStart = new Date().getTime(), byEnd = new Date().getTime() }) {
     const sortBy = { type, order: +order }
     const filterByAmeneties = { accessibility, wifi, acceptsPets, airConditioner, shampoo, parking, children }
+    if (!byLat) return Promise.resolve([]);
     const queryObj = {
         $and: [
             {
